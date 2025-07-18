@@ -37,25 +37,7 @@ io.on('connection', (socket) => {
             io.to(roomId).emit('participants', rooms[roomId]);
         }
     });
-    socket.on('end-room', ({ roomId }) => {
-        const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
-        if (socketsInRoom) {
-            for (const id of socketsInRoom) {
-                const clientSocket = io.sockets.sockets.get(id);
-                clientSocket?.leave(roomId);
-                clientSocket?.emit('room-ended');
-            }
-            delete rooms[roomId];
-            delete roomPasswords[roomId];
-        }
-    });
-    socket.on('send-message', ({ roomId, sender, message }) => {
-        io.to(roomId).emit('receive-message', {
-            sender,
-            message,
-            time: new Date().toLocaleTimeString(),
-        });
-    });
+
     socket.on('offer', (data) => {
         socket.to(data.roomId).emit('offer', data);
     });

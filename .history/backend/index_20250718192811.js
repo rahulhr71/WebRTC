@@ -49,13 +49,6 @@ io.on('connection', (socket) => {
             delete roomPasswords[roomId];
         }
     });
-    socket.on('send-message', ({ roomId, sender, message }) => {
-        io.to(roomId).emit('receive-message', {
-            sender,
-            message,
-            time: new Date().toLocaleTimeString(),
-        });
-    });
     socket.on('offer', (data) => {
         socket.to(data.roomId).emit('offer', data);
     });
