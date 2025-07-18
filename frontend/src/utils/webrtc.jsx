@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const socket = io('https://your-render-url.onrender.com'); // replace with your backend URL
+const socket = io('https://webrtc-thrz.onrender.com/'); // replace with your backend URL
 let peerConnection;
 let remoteStream;
 
